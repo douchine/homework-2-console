@@ -1,0 +1,20 @@
+{
+  "name": "douchine-date-util",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "simple-date": "date.js"
+  },
+  "scripts": {
+    "server": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^18.0.0"
+  },
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
