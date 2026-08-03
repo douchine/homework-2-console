@@ -4,21 +4,40 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const secret = Math.floor(Math.random() * 101);
-console.log ('Загадано число от 0 до 100');
-function gameStart () {
-rl.question('Введите число: ',(answer) => {
-    const userNumber = Number(answer);
-    if (secret === userNumber) {
-        console.log ('Вы угадали число');
-        rl.close();
-    } else if (secret < userNumber) {
-        console.log ('Загаданное число меньше');
-        gameStart();
-    } else if (secret > userNumber) {
-        console.log ('Загаданное число больше');
-        gameStart();
-    }
+rl.on('SIGINT', () => {
+    console.log('\nДо свидания!');
+    rl.close();
+    process.exit(0);
 });
+
+const secret = Math.floor(Math.random() * 101);
+
+function gameStart() {
+    rl.question('', (answer) => {
+    const userNumber = Number(answer);
+
+    if (isNaN(userNumber)) {
+        console.log('Введите число!');
+        gameStart();
+        return;
+        }
+    if (userNumber < 0 || userNumber > 100) {
+        console.log('Число должно быть от 0 до 100');
+        gameStart();
+        return;
+        }
+    if (secret === userNumber) {
+        console.log('Отгадано число', secret);
+        rl.close();
+        } else if (secret < userNumber) {
+            console.log('Меньше');
+            gameStart();
+        } else {
+            console.log('Больше');
+            gameStart();
+        }
+    });
 }
+
+console.log('Загадано число в диапазоне от 0 до 100');
 gameStart();
